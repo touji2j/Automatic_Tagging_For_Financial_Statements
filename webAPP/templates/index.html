@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFRS Tagging</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+</head>
+<body style="background-color:#D0E8E6">
+<div class="container" style='width:500px; margin:0 auto'>
+    <h1 style="font-family: Poppins;
+font-size: 28px;
+font-style: normal;
+font-weight: 400;
+line-height: 42px;
+letter-spacing: 0em;
+text-align: center;
+">Automatic IFRS Tagging <small>🏷️</small></h1>
+    	<div class="jumbotron" style="background-color:#E4CADF; width:500px; margin:0 auto;border-radius: 15px;">
+        	<h3 style="font-family: Poppins;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: center;
+
+">Fill financial statement information :</h3>
+<span></span>
+        		<form method="POST" name="form-statment" action="http://127.0.0.1:5000/saveData">
+        	 		<div class="form-group">
+           				<label for="issueDescInput" style="font-family: Poppins;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 550;
+                    line-height: 36px;
+                    letter-spacing: 0em;
+                    text-align: center;" > Financial Statement</label>
+             				<select class="form-control" id="finstat" style="height: 45px; width: 246px;left: 927px; top: 267px; border-radius: [object Object]px;" name="finstat">
+             				<option value="Income Statement">Income Statement</option>
+              					<option value="Profit or loss Statement">Profit or loss Statement</option>
+               					<option value="Cash Flow Statement">Cash Flow Statement</option>
+              
+           					 </select> 
+       				</div>
+       				    <div class="form-group">
+
+						<label style="font-family: Poppins;
+font-size: 18px;
+font-style: normal;
+font-weight: 550;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: center;
+" >Concept Name</label>
+            			<input type="text" class="form-control" placeholder="Enter concept name..." id='elt' name="elt" style="height: 45px; width: 246px;left: 927px; top: 267px; border-radius: [object Object]px;">
+        				</div>
+
+        	  		<div class="form-group">
+            			<label style="font-family: Poppins;
+font-size: 18px;
+font-style: normal;
+font-weight: 550;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: center;
+" for="issueDescInput">Company Name</label>
+             				<select class="form-control" name="company" id="company" style="height: 45px; width: 246px;left: 927px; top: 267px; border-radius: [object Object]px;">
+
+              					<option value="Capgemini">Capgemini</option>
+					            <option value="Airbus">Airbus</option>
+					            <option value="Deloitte">Deloitte</option>
+             
+            				</select> 
+       				</div>
+       				<div class="form-group">
+       					<label style="font-family: Poppins;
+font-size: 18px;
+font-style: normal;
+font-weight: 0;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: center;
+" >Fact value</label>
+       					<input type="text" id="factvalue" name="factvalue" class="form-control" placeholder="Enter value ..." style="height: 45px; width: 246px;left: 927px; top: 267px; border-radius: [object Object]px;">
+       				</div>
+              <div class="form-group">
+                <label style="font-family: Poppins;
+font-size: 18px;
+font-style: normal;
+font-weight: 0;
+line-height: 36px;
+letter-spacing: 0em;
+text-align: center;
+" >IFRS Tag</label>
+                <input type="text" name="factvalue" id="factvalue" class="form-control" placeholder="Predicting IFRS Tag..." style="height: 45px; width: 246px;left: 927px; top: 267px; border-radius: [object Object]px;">
+              </div>
+       				<div class="form-group">
+       				<input type="button" id='script' name="predict" value=" Predict " onclick="goPython()">
+       				   
+                        <button type="submit" style="height: 31px;
+width: 104px;
+left: 1294px;
+top: 424px;
+border-radius: 10px;
+">Clear</button>
+</div>
+                    </div>
+<div>
+                    <button type="submit" class="btn btn-primary" style="width:104px; margin:0 auto ">Save record</button>
+                    </div>
+
+                    <!-- <div>
+                        <button type="submit" class="btn btn-primary" style="width:120px; margin:0 auto ">Save all as PDF</button>
+                    </div> -->
+                   
+                </form>
+</div>
+</div>
+        
+
+ 
+            
+    <span></span>
+<div id="preview"></div>
+<script src="../static/frontend/main.js"></script>
+
+
+            
+
+</body>
+<script>
+
+  // form = document.forms['form-statment'];
+  // loading = false;
+  // host = "http://127.0.0.1:5000/saveData";
+
+  // form.addEventListener('submit', e => {
+  //   e.preventDefault()
+
+  //   if(!loading) {
+  //     loading = true;
+
+  //     // Form-encoded Request, like from Form
+  //     let fetchFormEncodedRequest = {
+  //         cache: "no-cache",
+  //         method: "POST",
+  //         headers: {
+  //             'Content-Type': 'application/x-www-form-urlencoded',
+  //         },
+  //         body: new URLSearchParams({
+  //           'form': new FormData(form)
+  //         }),
+  //     }
+
+  //     fetch(host, fetchFormEncodedRequest)
+  //     .then(response => {
+  //       console.log({ form, res: response })
+  //     })
+  //     .catch(error => {
+  //       console.log('Error !', error.message)
+  //     })
+  //   }
+
+  // })
+
+</script>
+</html>
