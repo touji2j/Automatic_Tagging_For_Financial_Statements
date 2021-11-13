@@ -1,3 +1,4 @@
+##### July 2021 – Sep 2021
 #### 📌The project is about building a web app application that aims to automate financial statements tagging.
 #### 📌The tagging is based on [IFRS Taxonomy 2021](https://www.ifrs.org/issued-standards/ifrs-taxonomy/ifrs-taxonomy-2021/).
 #### 📌the data was scraped and collected from recent annual reports of some companies.
